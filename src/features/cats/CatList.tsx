@@ -8,7 +8,7 @@ function CatList() {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getCats());
-  }, []);
+  }, [dispatch]);
   const cats = useAppSelector((state) => state.cats.cats);
   return (
     <Container>
