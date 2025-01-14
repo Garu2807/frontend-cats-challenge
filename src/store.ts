@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import catsReducer from './features/cats/CatSlice';
+import favouritesReducer from './features/favourites/FavouritesSlice';
 
 const store = configureStore({
-  reducer: { cats: catsReducer },
+  reducer: { cats: catsReducer, favourites: favouritesReducer },
 });
 
 export type AppDispatch = typeof store.dispatch;
