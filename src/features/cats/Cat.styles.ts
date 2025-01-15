@@ -1,8 +1,8 @@
-// Cat.styles.js
 import styled from 'styled-components';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { styled as muiStyled } from '@mui/system';
+
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
@@ -16,10 +16,15 @@ export const Item = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-top: 50px;
   position: relative;
   overflow: hidden; /* Скрываем выходящие элементы */
-
+  &:hover {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(1.05);
+    box-shadow: 0px 5px 8px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+  }
   &:hover button {
     opacity: 1;
   }
@@ -32,10 +37,6 @@ export const IMG = styled.img`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   object-fit: cover;
   transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.05);
-  }
 `;
 
 export const ButtonStyled = styled.button`
@@ -70,35 +71,38 @@ export const IconWrapper = styled.div`
 `;
 
 /* Контурное сердечко */
-export const StyledFavoriteBorderIcon = muiStyled(FavoriteBorderIcon)(
-  ({ theme }) => ({
-    fontSize: '80px',
-    color: 'red',
-    transition: 'opacity 0.3s ease, transform 0.3s ease',
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    opacity: 1,
-    width: '100%',
-    height: '100%',
-    [`${ButtonStyled}:hover &`]: {
-      opacity: 0,
-      transform: 'scale(1.2)',
-    },
-  })
-);
-
-export const StyledFavoriteIcon = muiStyled(FavoriteIcon)(({ theme }) => ({
+export const StyledFavoriteBorderIcon = muiStyled(FavoriteBorderIcon, {
+  shouldForwardProp: (prop) => prop !== 'clicked',
+})<{ clicked: boolean }>(({ clicked }) => ({
   fontSize: '80px',
-  color: 'red',
+  color: '#F24E1E',
   transition: 'opacity 0.3s ease, transform 0.3s ease',
   position: 'absolute',
   top: '0',
   left: '0',
-  opacity: 0,
+  opacity: clicked ? 0 : 1,
   width: '100%',
   height: '100%',
-  [`${ButtonStyled}:hover &`]: {
+  '&:hover': {
+    opacity: 1,
+    transform: 'scale(1.2)',
+  },
+}));
+
+/* Полное сердечко */
+export const StyledFavoriteIcon = muiStyled(FavoriteIcon, {
+  shouldForwardProp: (prop) => prop !== 'clicked',
+})<{ clicked: boolean }>(({ clicked }) => ({
+  fontSize: '80px',
+  color: clicked ? '#FF3A00' : '#F24E1E',
+  transition: 'opacity 0.3s ease, transform 0.3s ease, color 0.3s ease',
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  opacity: clicked ? 1 : 0,
+  width: '100%',
+  height: '100%',
+  '&:hover': {
     opacity: 1,
     transform: 'scale(1.2)',
   },

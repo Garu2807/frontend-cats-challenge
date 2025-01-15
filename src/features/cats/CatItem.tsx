@@ -1,5 +1,4 @@
-// CatItem.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Cat } from './types/Cat';
 import {
   ButtonStyled,
@@ -7,6 +6,7 @@ import {
   Item,
   StyledFavoriteBorderIcon,
   StyledFavoriteIcon,
+  IconWrapper,
 } from './Cat.styles';
 import { useAppDispatch, useAppSelector } from '../../store';
 import {
@@ -20,32 +20,33 @@ type CatPropsType = {
 
 function CatItem({ cat }: CatPropsType) {
   const dispatch = useAppDispatch();
+  const favourites = useAppSelector((state) => state.favourites.favourites);
+  const [clicked, setClicked] = useState(false);
 
-  // Получаем список избранных котиков из Redux
-  const favorites = useAppSelector((state) => state.favourites.favourites);
+  useEffect(() => {
+    setClicked(favourites.some((favouriteCat) => favouriteCat.id === cat.id));
+  }, [favourites, cat.id]);
 
-  // Проверяем, добавлен ли текущий котик в избранное
-  const isFavorite = favorites.some((favCat) => favCat.id === cat.id);
-
-  const handleToggleFavorite = () => {
-    if (isFavorite) {
-      dispatch(removeFromFavorites(cat.id));
+  const handleToggleFavorite = (cat: Cat): void => {
+    if (clicked) {
+      dispatch(removeFromFavorites(cat));
     } else {
       dispatch(addToFavorites(cat));
     }
+    setClicked(!clicked);
   };
 
   return (
     <Item>
       <IMG src={cat.url} alt="котик" />
-      <ButtonStyled
-        onClick={handleToggleFavorite}
-        aria-label={isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}
-      >
-        {isFavorite ? <StyledFavoriteIcon /> : <StyledFavoriteBorderIcon />}
+      <ButtonStyled onClick={() => handleToggleFavorite(cat)}>
+        <IconWrapper>
+          <StyledFavoriteBorderIcon clicked={clicked} />
+          <StyledFavoriteIcon clicked={clicked} />
+        </IconWrapper>
       </ButtonStyled>
     </Item>
   );
 }
 
-export default React.memo(CatItem);
+export default CatItem;

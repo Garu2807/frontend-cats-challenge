@@ -1,10 +1,16 @@
-import { Navbar } from './NavBar.styles';
+import { Container, LinkText, Navbar, StyledLink } from './NavBar.styles';
 import { Link } from 'react-router-dom';
 function NavBar() {
   return (
     <Navbar>
-      <Link to={'/'}>Все котики</Link>
-      <Link to={'/likes'}>Любимые котики</Link>
+      <Container>
+        <StyledLink to={'/'}>
+          <LinkText>Все котики</LinkText>
+        </StyledLink>
+        <StyledLink to={'/likes'}>
+          <LinkText>Любимые котики</LinkText>
+        </StyledLink>
+      </Container>
     </Navbar>
   );
 }
