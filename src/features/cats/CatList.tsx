@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store';
 import CatItem from './CatItem';
 import { Container } from './Cat.styles';
@@ -14,8 +14,13 @@ function CatList() {
   const cats = useAppSelector(selectCats);
   const currentPage = useAppSelector(selectCurrentPage);
   const fetching = useAppSelector(selectFetching);
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
     if (cats.length === 0) {
       dispatch(fetchCats(currentPage));
     }
