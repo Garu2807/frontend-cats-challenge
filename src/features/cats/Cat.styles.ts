@@ -8,6 +8,11 @@ export const Container = styled.div`
   justify-content: space-between;
   padding: 0 65px;
   flex-wrap: wrap;
+
+  @media (max-width: 430px) {
+    padding: 0 20px;
+    justify-content: center;
+  }
 `;
 
 export const Item = styled.div`
@@ -18,7 +23,9 @@ export const Item = styled.div`
   justify-content: center;
   margin-top: 50px;
   position: relative;
-  overflow: hidden; /* Скрываем выходящие элементы */
+  overflow: hidden;
+  scroll-snap-align: start;
+
   &:hover {
     transition: opacity 0.3s ease, transform 0.3s ease;
     transform: scale(1.05);
@@ -27,6 +34,15 @@ export const Item = styled.div`
   }
   &:hover button {
     opacity: 1;
+  }
+
+  @media (max-width: 430px) {
+    width: 300px;
+    height: 300px;
+  }
+  @media (max-width: 393px) {
+    width: 300px;
+    height: 300px;
   }
 `;
 
@@ -37,26 +53,51 @@ export const IMG = styled.img`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   object-fit: cover;
   transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  @media (max-width: 430px) {
+    height: 100%;
+  }
+
+  @media (max-width: 393px) {
+    height: 100%;
+  }
 `;
 
 export const ButtonStyled = styled.button`
   position: absolute;
-  bottom: 20px; /* Увеличен отступ снизу */
-  right: 20px; /* Увеличен отступ справа */
+  bottom: 20px;
+  right: 20px;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  z-index: 1; /* Для отображения поверх изображения */
+  z-index: 1;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0; /* Скрыто по умолчанию */
+  opacity: 0;
   transition: opacity 0.3s ease;
   width: 100px;
   height: 100px;
   &:hover {
     opacity: 1;
+  }
+
+  @media (max-width: 430px) {
+    bottom: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+  }
+  @media (max-width: 393px) {
+    bottom: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
   }
 `;
 
@@ -70,7 +111,6 @@ export const IconWrapper = styled.div`
   height: 100%;
 `;
 
-/* Контурное сердечко */
 export const StyledFavoriteBorderIcon = muiStyled(FavoriteBorderIcon, {
   shouldForwardProp: (prop) => prop !== 'clicked',
 })<{ clicked: boolean }>(({ clicked }) => ({
@@ -87,9 +127,14 @@ export const StyledFavoriteBorderIcon = muiStyled(FavoriteBorderIcon, {
     opacity: 1,
     transform: 'scale(1.2)',
   },
+  '@media (max-width: 430px)': {
+    fontSize: '40px',
+  },
+  '@media (max-width: 393px)': {
+    fontSize: '40px',
+  },
 }));
 
-/* Полное сердечко */
 export const StyledFavoriteIcon = muiStyled(FavoriteIcon, {
   shouldForwardProp: (prop) => prop !== 'clicked',
 })<{ clicked: boolean }>(({ clicked }) => ({
@@ -105,5 +150,11 @@ export const StyledFavoriteIcon = muiStyled(FavoriteIcon, {
   '&:hover': {
     opacity: 1,
     transform: 'scale(1.2)',
+  },
+  '@media (max-width: 430px)': {
+    fontSize: '40px',
+  },
+  '@media (max-width: 393px)': {
+    fontSize: '40px',
   },
 }));

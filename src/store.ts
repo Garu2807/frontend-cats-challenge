@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import catsReducer from './features/cats/CatSlice';
+import catsReducer from './features/cats/CatsSlice';
 import favouritesReducer from './features/favourites/FavouritesSlice';
 
 const store = configureStore({
