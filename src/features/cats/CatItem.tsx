@@ -37,7 +37,7 @@ function CatItem({ cat }: CatPropsType) {
   };
 
   return (
-    <Item>
+    <Item data-testid="cat-item">
       <IMG src={cat.url} alt="котик" />
       <ButtonStyled onClick={() => handleToggleFavorite(cat)}>
         <IconWrapper>

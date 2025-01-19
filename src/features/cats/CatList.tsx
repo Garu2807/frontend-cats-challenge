@@ -45,7 +45,7 @@ function CatList() {
   }, [dispatch, currentPage, fetching]);
 
   return (
-    <Container>
+    <Container data-testid="cats-list">
       {cats.map((cat) => (
         <CatItem cat={cat} key={cat.id} />
       ))}
