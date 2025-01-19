@@ -13,7 +13,7 @@ function App() {
       <Main>
         <NavBar />
         <Routes>
-          <Route path="/" element={<CatList />} />
+          <Route path="/main" element={<CatList />} />
           <Route path="/likes" element={<FavouritesCats />} />
         </Routes>
       </Main>
