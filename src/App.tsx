@@ -3,9 +3,12 @@ import CatList from './features/cats/CatList';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './features/navbar/NavBar';
 import FavouritesCats from './features/favourites/FavouritesCats';
+
 function App() {
+  console.log('App component rendered');
+
   return (
-    <Router>
+    <Router basename="/frontend-cats-challenge">
       <Global />
       <Main>
         <NavBar />
