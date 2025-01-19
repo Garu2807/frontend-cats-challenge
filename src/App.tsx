@@ -8,7 +8,7 @@ function App() {
   console.log('App component rendered');
 
   return (
-    <Router>
+    <Router basename="/frontend-cats-challenge">
       <Global />
       <Main>
         <NavBar />
