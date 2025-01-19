@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/frontend-cats-challenge/static/js/main.b2cdd8b7.js",
+    "main.js": "/frontend-cats-challenge/static/js/main.9257f5df.js",
     "index.html": "/frontend-cats-challenge/index.html",
-    "main.b2cdd8b7.js.map": "/frontend-cats-challenge/static/js/main.b2cdd8b7.js.map"
+    "main.9257f5df.js.map": "/frontend-cats-challenge/static/js/main.9257f5df.js.map"
   },
   "entrypoints": [
-    "static/js/main.b2cdd8b7.js"
+    "static/js/main.9257f5df.js"
   ]
 }
