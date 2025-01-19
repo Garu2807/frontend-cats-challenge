@@ -19,6 +19,7 @@ type CatPropsType = {
 };
 
 function CatItem({ cat }: CatPropsType) {
+  console.log('item component rendered');
   const dispatch = useAppDispatch();
   const favourites = useAppSelector((state) => state.favourites.favourites);
   const [clicked, setClicked] = useState(false);

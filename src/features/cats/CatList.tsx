@@ -10,6 +10,7 @@ import {
 } from './CatsSlice';
 
 function CatList() {
+  console.log('List component rendered');
   const dispatch = useAppDispatch();
   const cats = useAppSelector(selectCats);
   const currentPage = useAppSelector(selectCurrentPage);
