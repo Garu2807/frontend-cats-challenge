@@ -1,16 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { RootState } from '../../store';
+import { CatState } from './types/CatState';
 
 const apiKey = process.env.REACT_APP_API_KEY;
 
-export const fetchCats = createAsyncThunk(
-  'cats/fetchCats',
+export const getCats = createAsyncThunk(
+  'cats/getCats',
   async (page: number) => {
     if (!apiKey) {
       throw new Error('API key is missing');
     }
-    const response = await axios.get(
+    const response = await fetch(
       `https://api.thecatapi.com/v1/images/search?limit=15&page=${page}`,
       {
         headers: {
@@ -19,29 +19,36 @@ export const fetchCats = createAsyncThunk(
         },
       }
     );
-    console.log(response.data);
-    return response.data;
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
   }
 );
+const initialState: CatState = {
+  cats: [],
+  currentPage: 0,
+  fetching: false,
+};
 
 const catsSlice = createSlice({
   name: 'cats',
-  initialState: {
-    cats: [] as any[],
-    currentPage: 0,
-    fetching: false,
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchCats.pending, (state) => {
+    builder.addCase(getCats.pending, (state) => {
       state.fetching = true;
     });
-    builder.addCase(fetchCats.fulfilled, (state, action) => {
+    builder.addCase(getCats.fulfilled, (state, action) => {
       state.cats = [...state.cats, ...action.payload];
       state.currentPage += 1;
       state.fetching = false;
     });
-    builder.addCase(fetchCats.rejected, (state) => {
+    builder.addCase(getCats.rejected, (state) => {
       state.fetching = false;
     });
   },

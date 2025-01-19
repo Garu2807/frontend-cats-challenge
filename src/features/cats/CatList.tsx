@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../store';
 import CatItem from './CatItem';
 import { Container } from './Cat.styles';
 import {
-  fetchCats,
+  getCats,
   selectCats,
   selectCurrentPage,
   selectFetching,
@@ -22,7 +22,7 @@ function CatList() {
       return;
     }
     if (cats.length === 0) {
-      dispatch(fetchCats(currentPage));
+      dispatch(getCats(currentPage));
     }
   }, [dispatch, cats.length, currentPage]);
 
@@ -34,7 +34,7 @@ function CatList() {
           100 &&
         !fetching
       ) {
-        dispatch(fetchCats(currentPage));
+        dispatch(getCats(currentPage));
       }
     };
 
