@@ -46,9 +46,10 @@ function CatList() {
 
   return (
     <Container>
-      {cats.map((cat) => (
-        <CatItem cat={cat} key={cat.id} />
-      ))}
+      {cats.map((cat) => {
+        console.log('Mapping cat:', cat); // Логирование каждого элемента
+        return <CatItem cat={cat} key={cat.id} />;
+      })}
       {fetching && (
         <div style={{ textAlign: 'center', padding: '20px', width: '100%' }}>
           ... загружаем еще котиков ...

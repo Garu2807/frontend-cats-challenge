@@ -3,7 +3,7 @@ import { RootState } from '../../store';
 import { CatState } from './types/CatState';
 
 const apiKey = process.env.REACT_APP_API_KEY;
-
+console.log(`ТВОЙ КЛЮЧ: ${apiKey}`);
 export const getCats = createAsyncThunk(
   'cats/getCats',
   async (page: number) => {
