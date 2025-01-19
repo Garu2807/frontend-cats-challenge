@@ -10,7 +10,7 @@ import {
 } from './CatsSlice';
 
 function CatList() {
-  console.log('List component rendered');
+  console.log('CatList component rendered');
   const dispatch = useAppDispatch();
   const cats = useAppSelector(selectCats);
   const currentPage = useAppSelector(selectCurrentPage);
@@ -18,11 +18,13 @@ function CatList() {
   const isInitialMount = useRef(true);
 
   useEffect(() => {
+    console.log('Initial mount check');
     if (isInitialMount.current) {
       isInitialMount.current = false;
       return;
     }
     if (cats.length === 0) {
+      console.log('Fetching cats for the first time');
       dispatch(getCats(currentPage));
     }
   }, [dispatch, cats.length, currentPage]);
@@ -35,6 +37,7 @@ function CatList() {
           100 &&
         !fetching
       ) {
+        console.log('Fetching more cats on scroll');
         dispatch(getCats(currentPage));
       }
     };
@@ -44,6 +47,8 @@ function CatList() {
       document.removeEventListener('scroll', scrollHandler);
     };
   }, [dispatch, currentPage, fetching]);
+
+  console.log('Cats:', cats); // Вывод данных котиков в консоль
 
   return (
     <Container>
