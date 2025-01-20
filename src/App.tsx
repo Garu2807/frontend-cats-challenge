@@ -2,14 +2,10 @@ import { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from './store';
 import { Global, Main } from './App.styles';
 import CatList from './features/cats/CatList';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './features/navbar/NavBar';
 import FavouritesCats from './features/favourites/FavouritesCats';
-import {
-  getCats,
-  selectCats,
-  selectCurrentPage,
-} from './features/cats/CatsSlice';
+import { getCats, selectCats, selectCurrentPage } from './features/cats/CatsSlice';
 
 function App() {
   console.log('App component rendered');
@@ -32,7 +28,7 @@ function App() {
   }, [dispatch, cats.length, currentPage]);
 
   return (
-    <Router>
+    <Router basename="/frontend-cats-challenge/">
       <Global />
       <Main>
         <NavBar />

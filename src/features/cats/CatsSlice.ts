@@ -1,39 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../../store';
 import { CatState } from './types/CatState';
+import * as api from './api';
 
-const apiKey = process.env.REACT_APP_API_KEY;
-export const getCats = createAsyncThunk(
-  'cats/getCats',
-  async (page: number) => {
-    if (!apiKey) {
-      throw new Error('API key is missing');
-    }
-    const response = await fetch(
-      `https://api.thecatapi.com/v1/images/search?limit=15&page=${page}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-API-KEY': apiKey,
-        },
-      }
-    );
-
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-
-    const data = await response.json();
-    console.log(data);
-    return data;
-  }
-);
 const initialState: CatState = {
   cats: [],
   currentPage: 0,
   fetching: false,
   error: undefined,
 };
+export const getCats = createAsyncThunk(
+  'cats/getCats',
+  async (page: number) => {
+    const cats = await api.getCats(page);
+    return cats;
+  }
+);
 
 const catsSlice = createSlice({
   name: 'cats',
@@ -44,10 +26,15 @@ const catsSlice = createSlice({
       state.fetching = true;
     });
     builder.addCase(getCats.fulfilled, (state, action) => {
-      state.cats = [...state.cats, ...action.payload];
-      state.currentPage += 1;
-      state.fetching = false;
+      if (action.payload.length > 0) {
+        state.cats = [...state.cats, ...action.payload]; // Добавляем новые котики к существующим
+        state.currentPage += 1; // Увеличиваем текущую страницу
+      } else {
+        console.warn('No more cats to fetch'); // Обработка случая, если данные закончились
+      }
+      state.fetching = false; // Сбрасываем состояние загрузки
     });
+
     builder.addCase(getCats.rejected, (state) => {
       state.fetching = false;
     });

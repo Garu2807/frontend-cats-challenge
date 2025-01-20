@@ -1,3 +1,4 @@
+// filepath: /Users/gagikarutunan/Desktop/frontend-cats-challenge/src/features/cats/CatList.tsx
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store';
 import CatItem from './CatItem';
@@ -10,39 +11,40 @@ import {
 } from './CatsSlice';
 
 function CatList() {
-  console.log('CatList component rendered');
   const dispatch = useAppDispatch();
   const cats = useAppSelector(selectCats);
   const currentPage = useAppSelector(selectCurrentPage);
   const fetching = useAppSelector(selectFetching);
 
   useEffect(() => {
-    const scrollHandler = (e: any) => {
-      if (
-        e.target.documentElement.scrollHeight -
-          (e.target.documentElement.scrollTop + window.innerHeight) <
-          100 &&
-        !fetching
-      ) {
+    if (cats.length === 0 && !fetching) {
+      console.log('Initial fetch of cats');
+      dispatch(getCats(currentPage));
+    }
+
+    const handleScroll = () => {
+      const scrollPosition =
+        document.documentElement.scrollHeight -
+        (document.documentElement.scrollTop + window.innerHeight);
+
+      if (scrollPosition < 100 && !fetching) {
         console.log('Fetching more cats on scroll');
         dispatch(getCats(currentPage));
       }
     };
 
-    document.addEventListener('scroll', scrollHandler);
-    return () => {
-      document.removeEventListener('scroll', scrollHandler);
-    };
-  }, [dispatch, currentPage, fetching]);
+    document.addEventListener('scroll', handleScroll);
 
-  console.log('Cats:', cats); // Вывод данных котиков в консоль
+    return () => {
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, [dispatch, cats.length, currentPage, fetching]);
 
   return (
     <Container>
-      {cats.map((cat) => {
-        console.log('Mapping cat:', cat); // Логирование каждого элемента
-        return <CatItem cat={cat} key={cat.id} />;
-      })}
+      {cats.map((cat) => (
+        <CatItem cat={cat} key={cat.id} />
+      ))}
       {fetching && (
         <div style={{ textAlign: 'center', padding: '20px', width: '100%' }}>
           ... загружаем еще котиков ...
