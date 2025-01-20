@@ -1,10 +1,10 @@
-import { Global, Main } from './App.styles';
-import CatList from './features/cats/CatList';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import NavBar from './features/navbar/NavBar';
-import FavouritesCats from './features/favourites/FavouritesCats';
 import { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from './store';
+import { Global, Main } from './App.styles';
+import CatList from './features/cats/CatList';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import NavBar from './features/navbar/NavBar';
+import FavouritesCats from './features/favourites/FavouritesCats';
 import {
   getCats,
   selectCats,
@@ -13,10 +13,12 @@ import {
 
 function App() {
   console.log('App component rendered');
+
   const dispatch = useAppDispatch();
   const cats = useAppSelector(selectCats);
-  const isInitialMount = useRef(true);
   const currentPage = useAppSelector(selectCurrentPage);
+  const isInitialMount = useRef(true);
+
   useEffect(() => {
     console.log('Initial mount check');
     if (isInitialMount.current) {
@@ -28,8 +30,9 @@ function App() {
       dispatch(getCats(currentPage));
     }
   }, [dispatch, cats.length, currentPage]);
+
   return (
-    <Router basename="/frontend-cats-challenge/">
+    <Router>
       <Global />
       <Main>
         <NavBar />
@@ -41,5 +44,5 @@ function App() {
     </Router>
   );
 }
-//
+
 export default App;
