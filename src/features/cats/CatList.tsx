@@ -15,19 +15,6 @@ function CatList() {
   const cats = useAppSelector(selectCats);
   const currentPage = useAppSelector(selectCurrentPage);
   const fetching = useAppSelector(selectFetching);
-  const isInitialMount = useRef(true);
-
-  useEffect(() => {
-    console.log('Initial mount check');
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
-    if (cats.length === 0) {
-      console.log('Fetching cats for the first time');
-      dispatch(getCats(currentPage));
-    }
-  }, [dispatch, cats.length, currentPage]);
 
   useEffect(() => {
     const scrollHandler = (e: any) => {

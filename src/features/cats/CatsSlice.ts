@@ -32,6 +32,7 @@ const initialState: CatState = {
   cats: [],
   currentPage: 0,
   fetching: false,
+  error: undefined,
 };
 
 const catsSlice = createSlice({
