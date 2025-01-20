@@ -30,7 +30,7 @@ function App() {
     }
   }, [dispatch, cats.length, currentPage]);
   return (
-    <Router>
+    <Router basename="/frontend-cats-challenge/">
       <Global />
       <Main>
         <NavBar />
