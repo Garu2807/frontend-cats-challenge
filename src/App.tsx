@@ -9,7 +9,6 @@ import {
   getCats,
   selectCats,
   selectCurrentPage,
-  selectFetching,
 } from './features/cats/CatsSlice';
 
 function App() {
