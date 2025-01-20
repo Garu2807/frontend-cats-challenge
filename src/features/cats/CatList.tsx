@@ -18,7 +18,6 @@ function CatList() {
 
   useEffect(() => {
     if (cats.length === 0 && !fetching) {
-      console.log('Initial fetch of cats');
       dispatch(getCats(currentPage));
     }
 
@@ -28,7 +27,6 @@ function CatList() {
         (document.documentElement.scrollTop + window.innerHeight);
 
       if (scrollPosition < 100 && !fetching) {
-        console.log('Fetching more cats on scroll');
         dispatch(getCats(currentPage));
       }
     };
