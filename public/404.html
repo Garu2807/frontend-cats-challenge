@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0; url=/frontend-cats-challenge/" />
+    <script type="text/javascript">
+      var pathname = window.location.pathname.replace('/frontend-cats-challenge', '');
+      var newUrl = '/frontend-cats-challenge' + pathname;
+      window.location.replace(newUrl);
+    </script>
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
