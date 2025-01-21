@@ -6,7 +6,8 @@ import FavouritesCats from './features/favourites/FavouritesCats';
 
 function App() {
   return (
-    <Router basename="/frontend-cats-challenge/">
+    <Router basename={process.env.PUBLIC_URL}>
+      <Global />
       <Global />
       <Main>
         <NavBar />
