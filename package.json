@@ -2,7 +2,7 @@
   "name": "frontend-cats-challenge",
   "version": "0.1.0",
   "private": true,
-
+  "homepage": "https://garu2807.github.io/frontend-cats-challenge",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
