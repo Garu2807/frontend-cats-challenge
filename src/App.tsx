@@ -9,7 +9,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Router basename={import.meta.env.BASE_URL}>
+      <Router>
         <NavBar />
         <Routes>
           <Route path="/" element={<CatList />} />
